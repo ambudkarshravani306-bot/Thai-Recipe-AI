@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thai Recipe — Authentic Thai Cuisine</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      background-color: #fff5f8;
+      color: #4a1030;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, #f9a8c9 0%, #f472b6 50%, #fb7bb8 100%);
+      color: #5c1a35;
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(244,114,182,0.25);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      color: #5c1a35;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+
+    header nav {
+      display: flex;
+      align-items: center;
+      gap: 1.6rem;
+    }
+
+    header nav a {
+      color: #5c1a35;
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 600;
+      transition: color 0.15s;
+    }
+
+    header nav a:hover { color: #fff; }
+
+    .btn-signin {
+      background-color: #fff;
+      color: #e8437a;
+      border: none;
+      padding: 0.4rem 1.1rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      text-decoration: none;
+      box-shadow: 0 1px 4px rgba(232,67,122,0.18);
+    }
+
+    .btn-signin:hover { background-color: #fce7f3; color: #be185d; }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(160deg, #fff0f5 0%, #ffe4ef 50%, #ffd6e7 100%);
+      border-bottom: 1px solid #fbb6ce;
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+    }
+
+    .hero .eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #e8437a;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #831843;
+      max-width: 640px;
+      margin: 0 auto 0.6rem;
+    }
+
+    .hero .slogan {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: #e8437a;
+      font-weight: 600;
+      margin-bottom: 0.9rem;
+    }
+
+    .hero p {
+      font-size: 1rem;
+      color: #9d3560;
+      max-width: 500px;
+      margin: 0 auto 2rem;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.6rem;
+      border-radius: 24px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #f472b6, #e8437a);
+      color: #fff;
+      box-shadow: 0 3px 12px rgba(232,67,122,0.35);
+    }
+
+    .btn-primary:hover { background: linear-gradient(135deg, #ec4899, #be185d); }
+
+    .btn-outline {
+      background-color: #fff;
+      color: #e8437a;
+      border-color: #fbb6ce;
+    }
+
+    .btn-outline:hover { background-color: #fff0f5; }
+
+    /* ── Section wrapper ── */
+    .section {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #831843;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-sub {
+      font-size: 0.875rem;
+      color: #9d3560;
+      margin-bottom: 2rem;
+    }
+
+    /* ── Recipe cards ── */
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .recipe-card {
+      background: #fff;
+      border: 1px solid #fbb6ce;
+      border-radius: 14px;
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .recipe-card:hover {
+      box-shadow: 0 8px 28px rgba(244,114,182,0.25);
+      transform: translateY(-4px);
+    }
+
+    .recipe-thumb {
+      width: 100%;
+      height: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+    }
+
+    .thumb-1 { background: linear-gradient(135deg, #ffe4ef, #fbb6ce); }
+    .thumb-2 { background: linear-gradient(135deg, #ffd6e7, #f9a8d4); }
+    .thumb-3 { background: linear-gradient(135deg, #fff0f5, #fbcfe8); }
+    .thumb-4 { background: linear-gradient(135deg, #ffe4ef, #fecdd3); }
+    .thumb-5 { background: linear-gradient(135deg, #ffd6e7, #fda4af); }
+    .thumb-6 { background: linear-gradient(135deg, #fff5f8, #f9a8d4); }
+
+    .recipe-body { padding: 1rem 1rem 1.2rem; }
+
+    .recipe-body h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #831843;
+      margin-bottom: 0.3rem;
+    }
+
+    .recipe-body p {
+      font-size: 0.82rem;
+      color: #9d3560;
+      margin-bottom: 0.7rem;
+    }
+
+    .recipe-meta {
+      display: flex;
+      gap: 0.8rem;
+      font-size: 0.75rem;
+      color: #c2628a;
+    }
+
+    .recipe-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background: linear-gradient(135deg, #f472b6, #e8437a);
+      color: #fff;
+      border-radius: 999px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 0.2rem 0.7rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Category pills ── */
+    .pills {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .pill {
+      background-color: #fff0f5;
+      border: 1.5px solid #fbb6ce;
+      color: #be185d;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.3rem 0.9rem;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      text-decoration: none;
+    }
+
+    .pill:hover, .pill.active {
+      background: linear-gradient(135deg, #f472b6, #e8437a);
+      border-color: transparent;
+      color: #fff;
+    }
+
+    /* ── Info strip ── */
+    .info-strip {
+      background: linear-gradient(135deg, #f472b6, #e8437a);
+      color: #fff;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .info-strip .stat strong {
+      display: block;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .info-strip .stat span {
+      font-size: 0.8rem;
+      color: #fce7f3;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Sign-in modal overlay ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(131,24,67,0.4);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: #fff;
+      border-radius: 16px;
+      padding: 2.2rem 2rem;
+      width: 100%;
+      max-width: 380px;
+      margin: 1rem;
+      position: relative;
+      border-top: 4px solid #f472b6;
+      box-shadow: 0 10px 40px rgba(244,114,182,0.25);
+    }
+
+    .modal h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #831843;
+      margin-bottom: 0.3rem;
+    }
+
+    .modal .modal-sub {
+      font-size: 0.82rem;
+      color: #9d3560;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: #e8437a;
+      line-height: 1;
+    }
+
+    .form-group { margin-bottom: 1rem; }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #831843;
+      margin-bottom: 0.35rem;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.55rem 0.8rem;
+      border: 1px solid #fbb6ce;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      color: #4a1030;
+      outline: none;
+      transition: border-color 0.15s;
+      background: #fff5f8;
+    }
+
+    .form-group input:focus { border-color: #f472b6; background: #fff; }
+
+    .btn-full {
+      width: 100%;
+      padding: 0.65rem;
+      background: linear-gradient(135deg, #f472b6, #e8437a);
+      color: #fff;
+      border: none;
+      border-radius: 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-top: 0.5rem;
+      box-shadow: 0 3px 12px rgba(232,67,122,0.3);
+    }
+
+    .btn-full:hover { background: linear-gradient(135deg, #ec4899, #be185d); }
+
+    .modal-footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: #9d3560;
+      margin-top: 1rem;
+    }
+
+    .modal-footer a { color: #e8437a; text-decoration: none; font-weight: 600; }
+    .modal-footer a:hover { text-decoration: underline; }
+
+    .divider {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #c2628a;
+      margin: 1rem 0;
+      position: relative;
+    }
+
+    .divider::before, .divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 38%;
+      height: 1px;
+      background: #fbb6ce;
+    }
+
+    .divider::before { left: 0; }
+    .divider::after { right: 0; }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      border-top: 1px solid #fbb6ce;
+      font-size: 0.75rem;
+      color: #9d3560;
+      background-color: #fff0f5;
+    }
+
+    footer p + p { margin-top: 0.2rem; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <!-- Cherry-blossom SVG icon -->
+      <svg class="logo-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="18" r="18" fill="#fce7f3"/>
+        <!-- petals -->
+        <ellipse cx="18" cy="10" rx="3.2" ry="5.5" fill="#f9a8d4" transform="rotate(0 18 18)"/>
+        <ellipse cx="18" cy="10" rx="3.2" ry="5.5" fill="#f472b6" transform="rotate(72 18 18)"/>
+        <ellipse cx="18" cy="10" rx="3.2" ry="5.5" fill="#f9a8d4" transform="rotate(144 18 18)"/>
+        <ellipse cx="18" cy="10" rx="3.2" ry="5.5" fill="#f472b6" transform="rotate(216 18 18)"/>
+        <ellipse cx="18" cy="10" rx="3.2" ry="5.5" fill="#f9a8d4" transform="rotate(288 18 18)"/>
+        <circle cx="18" cy="18" r="4" fill="#e8437a"/>
+        <circle cx="18" cy="18" r="2" fill="#fff"/>
+      </svg>
+      Thai Recipe
+    </div>
+    <nav>
+      <a href="#">Recipes</a>
+      <a href="#">Categories</a>
+      <a href="#">About</a>
+      <a href="#" class="btn-signin" id="openSignIn">Sign In</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="eyebrow">Authentic Thai Cuisine</p>
+    <h1>Discover the Heart of Thai Cooking</h1>
+    <p class="slogan">Where Every Bite Tells a Story 🌸</p>
+    <p>Explore traditional recipes, aromatic spices, and step-by-step guides to bring the flavours of Thailand to your kitchen.</p>
+    <div class="cta-group">
+      <a class="btn btn-primary" href="#">Browse Recipes</a>
+      <a class="btn btn-outline" href="#" id="openSignIn2">Create Free Account</a>
+    </div>
+  </section>
+
+  <!-- Stats strip -->
+  <div class="info-strip">
+    <div class="stat"><strong>120+</strong><span>Recipes</span></div>
+    <div class="stat"><strong>18</strong><span>Categories</span></div>
+    <div class="stat"><strong>4.9★</strong><span>Avg Rating</span></div>
+    <div class="stat"><strong>50k+</strong><span>Home Cooks</span></div>
+  </div>
+
+  <!-- Featured Recipes -->
+  <div class="section">
+    <h2 class="section-title">Featured Recipes</h2>
+    <p class="section-sub">Hand-picked classics every Thai food lover should try</p>
+
+    <div class="pills">
+      <a href="#" class="pill active">All</a>
+      <a href="#" class="pill">Soups &amp; Curries</a>
+      <a href="#" class="pill">Noodles</a>
+      <a href="#" class="pill">Rice Dishes</a>
+      <a href="#" class="pill">Salads</a>
+      <a href="#" class="pill">Desserts</a>
+      <a href="#" class="pill">Street Food</a>
+    </div>
+
+    <div class="recipe-grid">
+
+      <div class="recipe-card">
+        <div class="recipe-thumb thumb-2">🍛</div>
+        <div class="recipe-body">
+          <span class="tag">Curry</span>
+          <h3>Green Curry (Gaeng Keow Wan)</h3>
+          <p>Creamy coconut milk curry with Thai basil, green chillies, and your choice of protein.</p>
+          <div class="recipe-meta">
+            <span>⏱ 35 min</span>
+            <span>🌶 Medium</span>
+            <span>⭐ 4.9</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-card">
+        <div class="recipe-thumb thumb-1">🍝</div>
+        <div class="recipe-body">
+          <span class="tag">Noodles</span>
+          <h3>Pad Thai</h3>
+          <p>Stir-fried rice noodles with egg, tofu or shrimp, tamarind sauce, and crushed peanuts.</p>
+          <div class="recipe-meta">
+            <span>⏱ 20 min</span>
+            <span>🌶 Mild</span>
+            <span>⭐ 5.0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-card">
+        <div class="recipe-thumb thumb-3">🥗</div>
+        <div class="recipe-body">
+          <span class="tag">Salad</span>
+          <h3>Som Tum (Papaya Salad)</h3>
+          <p>Crunchy green papaya with lime, fish sauce, palm sugar, and a fiery chilli kick.</p>
+          <div class="recipe-meta">
+            <span>⏱ 15 min</span>
+            <span>🌶 Hot</span>
+            <span>⭐ 4.8</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-card">
+        <div class="recipe-thumb thumb-4">🍲</div>
+        <div class="recipe-body">
+          <span class="tag">Soup</span>
+          <h3>Tom Yum Goong</h3>
+          <p>Hot and sour prawn soup fragrant with lemongrass, kaffir lime, and galangal.</p>
+          <div class="recipe-meta">
+            <span>⏱ 25 min</span>
+            <span>🌶 Hot</span>
+            <span>⭐ 4.9</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-card">
+        <div class="recipe-thumb thumb-5">🍚</div>
+        <div class="recipe-body">
+          <span class="tag">Rice</span>
+          <h3>Khao Pad (Fried Rice)</h3>
+          <p>Classic Thai fried rice with jasmine rice, egg, spring onion, and soy sauce.</p>
+          <div class="recipe-meta">
+            <span>⏱ 15 min</span>
+            <span>🌶 Mild</span>
+            <span>⭐ 4.7</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-card">
+        <div class="recipe-thumb thumb-6">🍮</div>
+        <div class="recipe-body">
+          <span class="tag">Dessert</span>
+          <h3>Mango Sticky Rice</h3>
+          <p>Sweet glutinous rice soaked in coconut milk, served with fresh ripe mango slices.</p>
+          <div class="recipe-meta">
+            <span>⏱ 40 min</span>
+            <span>🌶 None</span>
+            <span>⭐ 5.0</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Thai Recipe. All rights reserved.</p>
+    <p style="color:#e8437a;margin-top:0.3rem">Made with IBM Bob 🌸</p>
+  </footer>
+
+  <!-- Sign-In Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal-close" id="closeModal">✕</button>
+      <h2>Welcome back 🍜</h2>
+      <p class="modal-sub">Sign in to save recipes and access your personal collection.</p>
+
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" id="email" placeholder="you@example.com" />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="••••••••" />
+      </div>
+
+      <button class="btn-full" id="btnSignIn">Sign In</button>
+
+      <div class="divider">or</div>
+
+      <button class="btn-full" id="btnGoogle" style="background:#fff;color:#3c4043;border:1px solid #dadce0;display:flex;align-items:center;justify-content:center;gap:0.6rem;font-weight:600;">
+        <svg width="18" height="18" viewBox="0 0 48 48">
+          <path fill="#4285F4" d="M44.5 20H24v8.5h11.7C34.2 33.6 29.6 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 6 1.1 8.2 3l6-6C34.5 5.1 29.5 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.9 0 20.4-7.9 20.4-21 0-1.4-.1-2.7-.3-4z"/>
+          <path fill="#34A853" d="M6.3 14.7l7 5.1C15 16.1 19.2 13 24 13c3.1 0 6 1.1 8.2 3l6-6C34.5 5.1 29.5 3 24 3 16.1 3 9.3 7.9 6.3 14.7z"/>
+          <path fill="#FBBC05" d="M24 45c5.5 0 10.4-1.9 14.2-5l-6.6-5.4C29.6 36.1 27 37 24 37c-5.6 0-10.2-3.4-11.7-8.1l-7 5.4C8.8 40.8 15.9 45 24 45z"/>
+          <path fill="#EA4335" d="M44.5 20H24v8.5h11.7c-.7 2.1-2 3.9-3.7 5.1l6.6 5.4C42.3 35.7 45 30.3 45 24c0-1.4-.1-2.7-.3-4z"/>
+        </svg>
+        Continue with Google
+      </button>
+
+      <div class="modal-footer">
+        <p>Don't have an account? <a href="#">Create one free</a></p>
+        <p style="margin-top:0.4rem"><a href="#">Forgot password?</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- watsonx Orchestrate agent root -->
+  <div id="wxo-root"></div>
+
+  <script>
+    function openModal() {
+      document.getElementById('modalOverlay').classList.add('open');
+    }
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('open');
+    }
+    document.getElementById('openSignIn').addEventListener('click', function(e) {
+      e.preventDefault(); openModal();
+    });
+    document.getElementById('openSignIn2').addEventListener('click', function(e) {
+      e.preventDefault(); openModal();
+    });
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+
+    // Sign In button
+    document.getElementById('btnSignIn').addEventListener('click', function() {
+      var email = document.getElementById('email').value.trim();
+      var password = document.getElementById('password').value;
+      if (!email || !password) {
+        alert('Please enter your email and password.');
+        return;
+      }
+      alert('Signing in as ' + email + '…\n(Connect this to your auth backend to complete sign-in.)');
+    });
+
+    // Continue with Google
+    document.getElementById('btnGoogle').addEventListener('click', function() {
+      var clientId = 'YOUR_GOOGLE_CLIENT_ID'; // Replace with your actual Google OAuth client ID
+      var redirectUri = encodeURIComponent(window.location.href.split('?')[0]);
+      var scope = encodeURIComponent('openid email profile');
+      var authUrl = 'https://accounts.google.com/o/oauth2/v2/auth'
+        + '?client_id=' + clientId
+        + '&redirect_uri=' + redirectUri
+        + '&response_type=token'
+        + '&scope=' + scope;
+      window.location.href = authUrl;
+    });
+
+    // ── IBM watsonx Orchestrate Chat Agent ──
+    window.wxOConfiguration = {
+      orchestrationID: "fe087a408955432b8d181ae5476e6e57_e8a5568c-6282-4980-a2b6-858069c231ca",
+      hostURL: "https://au-syd.watson-orchestrate.cloud.ibm.com",
+      rootElementID: "wxo-root",
+      deploymentPlatform: "ibmcloud",
+      crn: "crn:v1:bluemix:public:watsonx-orchestrate:au-syd:a/fe087a408955432b8d181ae5476e6e57:e8a5568c-6282-4980-a2b6-858069c231ca::",
+      chatOptions: {
+        agentId: "b19c835d-b90e-457c-8be4-cdc824471512",
+        welcomeMessage: "Sawasdee! \uD83D\uDE4F I'm your Thai Recipe assistant. Ask me for a recipe, ingredient substitutions, or cooking tips!",
+      }
+    };
+    setTimeout(function () {
+      var s = document.createElement('script');
+      s.src = window.wxOConfiguration.hostURL + '/wxochat/wxoLoader.js';
+      s.addEventListener('load', function () { wxoLoader.init(); });
+      document.head.appendChild(s);
+    }, 0);
+  </script>
+
+</body>
+</html>
