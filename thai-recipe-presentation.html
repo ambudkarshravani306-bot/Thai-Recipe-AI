@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Thai Recipe Website — Presentation</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, "Segoe UI", system-ui, sans-serif;
+    background: #1a0020;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+    gap: 1.5rem;
+  }
+
+  /* ── Slide shell ── */
+  .slide {
+    width: 100%;
+    max-width: 900px;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    page-break-after: always;
+  }
+
+  /* ── Slide counter ── */
+  .slide-number {
+    position: absolute;
+    bottom: 14px;
+    right: 20px;
+    font-size: 0.65rem;
+    font-weight: 600;
+    opacity: 0.5;
+    color: inherit;
+    letter-spacing: 0.05em;
+  }
+
+  /* ════════════════════════════════
+     SLIDE 1 — TITLE
+  ════════════════════════════════ */
+  .s1 {
+    background: linear-gradient(140deg, #4a0072 0%, #9c27b0 50%, #e91e8c 100%);
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 3rem;
+  }
+  .s1 .logo { font-size: 3.6rem; margin-bottom: 0.6rem; }
+  .s1 h1 { font-size: 2.6rem; font-weight: 800; line-height: 1.15; letter-spacing: -0.01em; }
+  .s1 h1 span { color: #f9d4ff; }
+  .s1 .sub { font-size: 1rem; margin-top: 0.8rem; color: #f3a8f5; max-width: 520px; }
+  .s1 .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 999px;
+    padding: 0.3rem 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+    color: #f9d4ff;
+  }
+
+  /* ════════════════════════════════
+     SLIDE 2 — AGENDA
+  ════════════════════════════════ */
+  .s2 { background: #fdf4ff; color: #1a0020; padding: 2.8rem 3.5rem; }
+  .slide-header { margin-bottom: 1.6rem; }
+  .slide-header .eyebrow {
+    font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.12em; color: #c026d3; margin-bottom: 0.3rem;
+  }
+  .slide-header h2 { font-size: 1.8rem; font-weight: 800; color: #6b21a8; }
+  .agenda-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+  .agenda-list li {
+    display: flex; align-items: center; gap: 1rem;
+    font-size: 1rem; font-weight: 500; color: #1a0020;
+  }
+  .agenda-num {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, #a21caf, #e91e8c);
+    color: #fff; font-weight: 700; font-size: 0.85rem;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .s2-deco {
+    position: absolute; right: 3rem; top: 50%; transform: translateY(-50%);
+    font-size: 7rem; opacity: 0.08;
+  }
+
+  /* ════════════════════════════════
+     SLIDE 3 — PROJECT OVERVIEW
+  ════════════════════════════════ */
+  .s3 { background: linear-gradient(135deg, #fdf4ff 0%, #f5f0ff 100%); color: #1a0020; padding: 2.8rem 3.5rem; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.4rem; }
+  .info-card {
+    background: #fff; border: 1px solid #e9b8f5; border-radius: 8px;
+    padding: 1.2rem 1.4rem; border-top: 3px solid #a21caf;
+  }
+  .info-card h3 { font-size: 0.85rem; font-weight: 700; color: #6b21a8; margin-bottom: 0.5rem; }
+  .info-card p { font-size: 0.8rem; color: #7e22ce; line-height: 1.55; }
+  .info-card ul { font-size: 0.8rem; color: #7e22ce; padding-left: 1rem; line-height: 1.8; }
+
+  /* ════════════════════════════════
+     SLIDE 4 — KEY FEATURES
+  ════════════════════════════════ */
+  .s4 {
+    background: linear-gradient(140deg, #4a0072 0%, #7b1fa2 100%);
+    color: #fff; padding: 2.8rem 3.5rem;
+  }
+  .s4 .slide-header .eyebrow { color: #f9d4ff; }
+  .s4 .slide-header h2 { color: #fff; }
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.4rem; }
+  .feat {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px; padding: 1.1rem 1rem;
+    border-top: 3px solid #f472b6;
+  }
+  .feat-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+  .feat h3 { font-size: 0.82rem; font-weight: 700; margin-bottom: 0.3rem; color: #f9d4ff; }
+  .feat p { font-size: 0.73rem; color: #e9b8f5; line-height: 1.5; }
+
+  /* ════════════════════════════════
+     SLIDE 5 — RECIPE CATALOGUE
+  ════════════════════════════════ */
+  .s5 { background: #fdf4ff; color: #1a0020; padding: 2.8rem 3.5rem; }
+  .recipe-table { width: 100%; border-collapse: collapse; margin-top: 1.2rem; font-size: 0.8rem; }
+  .recipe-table thead tr { background: linear-gradient(135deg, #a21caf, #e91e8c); color: #fff; }
+  .recipe-table th { padding: 0.55rem 0.8rem; text-align: left; font-weight: 700; font-size: 0.75rem; }
+  .recipe-table tbody tr:nth-child(even) { background: #fae8ff; }
+  .recipe-table tbody tr:nth-child(odd) { background: #fff; }
+  .recipe-table td { padding: 0.45rem 0.8rem; color: #1a0020; border-bottom: 1px solid #e9b8f5; }
+  .spice-hot { color: #be185d; font-weight: 700; }
+  .spice-med { color: #c026d3; font-weight: 700; }
+  .spice-mild { color: #65a30d; font-weight: 700; }
+  .spice-none { color: #6b7280; }
+
+  /* ════════════════════════════════
+     SLIDE 6 — SIGN IN & AUTH
+  ════════════════════════════════ */
+  .s6 { background: linear-gradient(135deg, #fdf4ff 0%, #f5f0ff 100%); padding: 2.8rem 3.5rem; color: #1a0020; }
+  .auth-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.4rem; align-items: start; }
+  .mock-modal {
+    background: #fff; border: 1px solid #e9b8f5; border-radius: 10px;
+    padding: 1.4rem 1.2rem; box-shadow: 0 4px 20px rgba(162,28,175,0.12);
+  }
+  .mock-modal h3 { font-size: 0.9rem; font-weight: 800; color: #6b21a8; margin-bottom: 0.25rem; }
+  .mock-modal p { font-size: 0.7rem; color: #7e22ce; margin-bottom: 0.8rem; }
+  .mock-field {
+    background: #fae8ff; border: 1px solid #e9b8f5; border-radius: 5px;
+    padding: 0.35rem 0.6rem; font-size: 0.72rem; color: #7e22ce;
+    margin-bottom: 0.5rem; width: 100%;
+  }
+  .mock-btn {
+    width: 100%; padding: 0.4rem; border-radius: 5px; font-size: 0.72rem;
+    font-weight: 700; text-align: center; color: #fff;
+    background: linear-gradient(135deg, #a21caf, #e91e8c);
+    margin-bottom: 0.4rem;
+  }
+  .mock-btn-g {
+    width: 100%; padding: 0.4rem; border-radius: 5px; font-size: 0.72rem;
+    font-weight: 600; text-align: center;
+    background: #fff; border: 1px solid #dadce0; color: #3c4043;
+    display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+  }
+  .auth-points { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+  .auth-points li {
+    display: flex; align-items: flex-start; gap: 0.7rem;
+    font-size: 0.82rem; color: #1a0020;
+  }
+  .auth-points li::before {
+    content: '✓'; color: #a21caf; font-weight: 800; flex-shrink: 0; margin-top: 0.05rem;
+  }
+
+  /* ════════════════════════════════
+     SLIDE 7 — AI AGENT
+  ════════════════════════════════ */
+  .s7 {
+    background: linear-gradient(140deg, #1e1b4b 0%, #3730a3 60%, #6d28d9 100%);
+    color: #fff; padding: 2.8rem 3.5rem;
+  }
+  .s7 .slide-header .eyebrow { color: #c4b5fd; }
+  .s7 .slide-header h2 { color: #fff; }
+  .agent-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.4rem; align-items: start; }
+  .chat-mockup {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px; padding: 1rem;
+  }
+  .chat-msg { display: flex; gap: 0.5rem; margin-bottom: 0.7rem; font-size: 0.75rem; }
+  .chat-msg.user { flex-direction: row-reverse; }
+  .chat-bubble {
+    background: rgba(255,255,255,0.12); border-radius: 8px;
+    padding: 0.4rem 0.7rem; max-width: 80%; color: #e9d5ff; line-height: 1.4;
+  }
+  .chat-msg.user .chat-bubble {
+    background: rgba(109,40,217,0.6); color: #fff;
+  }
+  .chat-avatar {
+    width: 24px; height: 24px; border-radius: 50%; background: #7c3aed;
+    display: flex; align-items: center; justify-content: center; font-size: 0.65rem;
+    flex-shrink: 0; align-self: flex-end;
+  }
+  .agent-points { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .agent-points li {
+    display: flex; align-items: flex-start; gap: 0.7rem;
+    font-size: 0.8rem; color: #e9d5ff;
+  }
+  .agent-points li .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: #f97316; flex-shrink: 0; margin-top: 0.35rem;
+  }
+
+  /* ════════════════════════════════
+     SLIDE 8 — STATS & IMPACT
+  ════════════════════════════════ */
+  .s8 { background: linear-gradient(140deg, #4a0072 0%, #c2185b 100%); color: #fff; padding: 2.8rem 3.5rem; }
+  .s8 .slide-header .eyebrow { color: #f9d4ff; }
+  .s8 .slide-header h2 { color: #fff; }
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 1.4rem; }
+  .stat-box {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 8px; padding: 1.2rem 0.8rem; text-align: center;
+  }
+  .stat-box strong { display: block; font-size: 2rem; font-weight: 800; color: #f9d4ff; line-height: 1; }
+  .stat-box span { font-size: 0.72rem; color: #e9b8f5; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 0.3rem; display: block; }
+  .bar-section { margin-top: 1.6rem; }
+  .bar-section h3 { font-size: 0.78rem; font-weight: 700; color: #f9d4ff; margin-bottom: 0.8rem; }
+  .bar-row { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem; font-size: 0.73rem; }
+  .bar-label { width: 120px; color: #e9b8f5; flex-shrink: 0; }
+  .bar-track { flex: 1; background: rgba(255,255,255,0.15); border-radius: 999px; height: 10px; }
+  .bar-fill { height: 10px; border-radius: 999px; background: linear-gradient(90deg, #e91e8c, #f9d4ff); }
+  .bar-val { width: 36px; text-align: right; color: #f9d4ff; font-weight: 700; }
+
+  /* ════════════════════════════════
+     SLIDE 9 — TECH STACK
+  ════════════════════════════════ */
+  .s9 { background: #fdf4ff; color: #1a0020; padding: 2.8rem 3.5rem; }
+  .tech-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.4rem; }
+  .tech-card {
+    background: #fff; border: 1px solid #e9b8f5;
+    border-radius: 8px; padding: 1rem;
+    border-left: 4px solid #a21caf;
+  }
+  .tech-card h3 { font-size: 0.8rem; font-weight: 700; color: #6b21a8; margin-bottom: 0.4rem; }
+  .tech-card ul { font-size: 0.75rem; color: #7e22ce; list-style: none; line-height: 1.7; }
+  .tech-card ul li::before { content: '→ '; color: #a21caf; font-weight: 700; }
+
+  /* ════════════════════════════════
+     SLIDE 10 — THANK YOU
+  ════════════════════════════════ */
+  .s10 {
+    background: linear-gradient(140deg, #4a0072 0%, #9c27b0 50%, #e91e8c 100%);
+    color: #fff; justify-content: center; align-items: center;
+    text-align: center; padding: 3rem;
+  }
+  .s10 .big-emoji { font-size: 4rem; margin-bottom: 0.8rem; }
+  .s10 h2 { font-size: 2.4rem; font-weight: 800; color: #f9d4ff; margin-bottom: 0.5rem; }
+  .s10 p { font-size: 1rem; color: #e9b8f5; max-width: 460px; }
+  .s10 .contact {
+    margin-top: 1.8rem; display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;
+  }
+  .s10 .contact-item {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 6px; padding: 0.45rem 1rem; font-size: 0.8rem; color: #f9d4ff;
+  }
+
+  /* ── Nav controls ── */
+  .controls {
+    position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 0.75rem; z-index: 50;
+  }
+  .ctrl-btn {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff; border-radius: 6px; padding: 0.45rem 1.2rem;
+    font-size: 0.82rem; font-weight: 600; cursor: pointer;
+    backdrop-filter: blur(4px);
+    transition: background 0.15s;
+  }
+  .ctrl-btn:hover { background: rgba(255,255,255,0.22); }
+  .ctrl-info {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.7); border-radius: 6px;
+    padding: 0.45rem 1rem; font-size: 0.8rem;
+    min-width: 80px; text-align: center;
+    backdrop-filter: blur(4px);
+  }
+
+  /* Print: one slide per page */
+  @media print {
+    body { background: #fff0ff; padding: 0; gap: 0; }
+    .slide { max-width: 100%; box-shadow: none; border-radius: 0; aspect-ratio: 16/9; break-after: page; }
+    .controls { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ SLIDE 1 — Title ══ -->
+<div class="slide s1" id="slide-1">
+  <div class="logo">🍜</div>
+  <div class="badge">Website Presentation</div>
+  <h1>Thai Recipe<br><span>Authentic Thai Cuisine</span></h1>
+  <p class="sub">A full-stack web experience featuring authentic recipes, AI-powered chat, secure sign-in, and IBM watsonx Orchestrate integration.</p>
+  <div class="slide-number">1 / 10</div>
+</div>
+
+<!-- ══ SLIDE 2 — Agenda ══ -->
+<div class="slide s2" id="slide-2">
+  <div class="s2-deco">🍜</div>
+  <div class="slide-header">
+    <p class="eyebrow">Today's Agenda</p>
+    <h2>What We'll Cover</h2>
+  </div>
+  <ul class="agenda-list">
+    <li><span class="agenda-num">1</span> Project Overview &amp; Goals</li>
+    <li><span class="agenda-num">2</span> Key Website Features</li>
+    <li><span class="agenda-num">3</span> Recipe Catalogue</li>
+    <li><span class="agenda-num">4</span> Sign In &amp; Authentication</li>
+    <li><span class="agenda-num">5</span> AI Agent — IBM watsonx Orchestrate</li>
+    <li><span class="agenda-num">6</span> Stats &amp; Impact</li>
+    <li><span class="agenda-num">7</span> Technology Stack</li>
+  </ul>
+  <div class="slide-number">2 / 10</div>
+</div>
+
+<!-- ══ SLIDE 3 — Project Overview ══ -->
+<div class="slide s3" id="slide-3">
+  <div class="slide-header">
+    <p class="eyebrow">Project Overview</p>
+    <h2>What is Thai Recipe?</h2>
+  </div>
+  <div class="two-col">
+    <div class="info-card">
+      <h3>🎯 Purpose</h3>
+      <p>A modern, fully interactive website that brings authentic Thai cooking to home chefs worldwide. Users can discover, browse, and learn recipes with step-by-step guides.</p>
+    </div>
+    <div class="info-card">
+      <h3>👥 Target Audience</h3>
+      <ul>
+        <li>Home cooks exploring Thai cuisine</li>
+        <li>Food enthusiasts seeking authentic flavours</li>
+        <li>Culinary students &amp; professionals</li>
+        <li>Restaurant owners needing inspiration</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🌍 Scope</h3>
+      <p>120+ recipes across 18 categories. Available 24/7, powered by an AI assistant and backed by a secure user account system.</p>
+    </div>
+    <div class="info-card">
+      <h3>📌 Core Values</h3>
+      <ul>
+        <li>Authenticity — traditional Thai methods</li>
+        <li>Accessibility — clear, easy steps</li>
+        <li>Community — save &amp; share recipes</li>
+        <li>Innovation — AI-driven assistance</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-number">3 / 10</div>
+</div>
+
+<!-- ══ SLIDE 4 — Key Features ══ -->
+<div class="slide s4" id="slide-4">
+  <div class="slide-header">
+    <p class="eyebrow">Core Capabilities</p>
+    <h2>Key Website Features</h2>
+  </div>
+  <div class="feature-grid">
+    <div class="feat">
+      <div class="feat-icon">🔍</div>
+      <h3>Recipe Discovery</h3>
+      <p>Browse &amp; filter 120+ recipes by category, spice level, prep time, and rating.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🔐</div>
+      <h3>Secure Sign-In</h3>
+      <p>Email/password and Google OAuth authentication to protect personal collections.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🤖</div>
+      <h3>AI Chat Agent</h3>
+      <p>IBM watsonx Orchestrate agent answers recipe questions and suggests dishes in real time.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">📱</div>
+      <h3>Responsive Design</h3>
+      <p>Seamless experience across desktop, tablet, and mobile devices.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">⭐</div>
+      <h3>Ratings &amp; Reviews</h3>
+      <p>Community star ratings and cook time displayed on every recipe card.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-icon">🗂️</div>
+      <h3>Category Filters</h3>
+      <p>Filter by Soups, Curries, Noodles, Rice, Salads, Desserts, and Street Food.</p>
+    </div>
+  </div>
+  <div class="slide-number">4 / 10</div>
+</div>
+
+<!-- ══ SLIDE 5 — Recipe Catalogue ══ -->
+<div class="slide s5" id="slide-5">
+  <div class="slide-header">
+    <p class="eyebrow">Content</p>
+    <h2>Featured Recipe Catalogue</h2>
+  </div>
+  <table class="recipe-table">
+    <thead>
+      <tr>
+        <th>Recipe</th>
+        <th>Category</th>
+        <th>Prep Time</th>
+        <th>Spice Level</th>
+        <th>Rating</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>🍛 Green Curry (Gaeng Keow Wan)</td>
+        <td>Curry</td>
+        <td>35 min</td>
+        <td class="spice-med">Medium</td>
+        <td>⭐ 4.9</td>
+      </tr>
+      <tr>
+        <td>🍝 Pad Thai</td>
+        <td>Noodles</td>
+        <td>20 min</td>
+        <td class="spice-mild">Mild</td>
+        <td>⭐ 5.0</td>
+      </tr>
+      <tr>
+        <td>🥗 Som Tum (Papaya Salad)</td>
+        <td>Salad</td>
+        <td>15 min</td>
+        <td class="spice-hot">Hot</td>
+        <td>⭐ 4.8</td>
+      </tr>
+      <tr>
+        <td>🍲 Tom Yum Goong</td>
+        <td>Soup</td>
+        <td>25 min</td>
+        <td class="spice-hot">Hot</td>
+        <td>⭐ 4.9</td>
+      </tr>
+      <tr>
+        <td>🍚 Khao Pad (Fried Rice)</td>
+        <td>Rice</td>
+        <td>15 min</td>
+        <td class="spice-mild">Mild</td>
+        <td>⭐ 4.7</td>
+      </tr>
+      <tr>
+        <td>🍮 Mango Sticky Rice</td>
+        <td>Dessert</td>
+        <td>40 min</td>
+        <td class="spice-none">None</td>
+        <td>⭐ 5.0</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="slide-number">5 / 10</div>
+</div>
+
+<!-- ══ SLIDE 6 — Sign In & Auth ══ -->
+<div class="slide s6" id="slide-6">
+  <div class="slide-header">
+    <p class="eyebrow">Authentication</p>
+    <h2>Sign In &amp; User Accounts</h2>
+  </div>
+  <div class="auth-cols">
+    <div class="mock-modal">
+      <h3>Welcome back 🍜</h3>
+      <p>Sign in to save recipes and access your personal collection.</p>
+      <div class="mock-field">you@example.com</div>
+      <div class="mock-field">••••••••</div>
+      <div class="mock-btn">Sign In</div>
+      <div style="text-align:center;font-size:0.65rem;color:#7e22ce;margin:0.3rem 0;">— or —</div>
+      <div class="mock-btn-g">
+        <svg width="14" height="14" viewBox="0 0 48 48">
+          <path fill="#4285F4" d="M44.5 20H24v8.5h11.7C34.2 33.6 29.6 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 6 1.1 8.2 3l6-6C34.5 5.1 29.5 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21c10.9 0 20.4-7.9 20.4-21 0-1.4-.1-2.7-.3-4z"/>
+        </svg>
+        Continue with Google
+      </div>
+    </div>
+    <ul class="auth-points">
+      <li>Email &amp; password sign-in with field validation</li>
+      <li>Google OAuth 2.0 — redirects to accounts.google.com</li>
+      <li>Modal overlay — opens from header Sign In button or hero CTA</li>
+      <li>Closes on background click or ✕ button</li>
+      <li>Create account &amp; Forgot password links included</li>
+      <li>Ready to connect to any backend auth service (JWT, sessions)</li>
+    </ul>
+  </div>
+  <div class="slide-number">6 / 10</div>
+</div>
+
+<!-- ══ SLIDE 7 — AI Agent ══ -->
+<div class="slide s7" id="slide-7">
+  <div class="slide-header">
+    <p class="eyebrow">AI Integration</p>
+    <h2>IBM watsonx Orchestrate Agent</h2>
+  </div>
+  <div class="agent-cols">
+    <div class="chat-mockup">
+      <div class="chat-msg">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-bubble">Sawasdee! 🙏 I'm your Thai Recipe assistant. Ask me for a recipe, ingredient substitutions, or cooking tips!</div>
+      </div>
+      <div class="chat-msg user">
+        <div class="chat-avatar" style="background:#6d28d9;">U</div>
+        <div class="chat-bubble">Give me a quick Pad Thai recipe</div>
+      </div>
+      <div class="chat-msg">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-bubble">Sure! Pad Thai takes just 20 min. You'll need rice noodles, egg, tamarind paste, fish sauce, and crushed peanuts…</div>
+      </div>
+    </div>
+    <ul class="agent-points">
+      <li><span class="dot"></span> Powered by IBM watsonx Orchestrate (au-syd region)</li>
+      <li><span class="dot"></span> Floating chat bubble — always accessible on every page</li>
+      <li><span class="dot"></span> Personalised Thai Recipe welcome message</li>
+      <li><span class="dot"></span> Answers recipe questions in natural language</li>
+      <li><span class="dot"></span> Suggests ingredient substitutions &amp; cooking tips</li>
+      <li><span class="dot"></span> Loaded via wxoLoader.js — zero extra dependencies</li>
+      <li><span class="dot"></span> Agent ID: b19c835d-b90e-457c-8be4-cdc824471512</li>
+    </ul>
+  </div>
+  <div class="slide-number">7 / 10</div>
+</div>
+
+<!-- ══ SLIDE 8 — Stats ══ -->
+<div class="slide s8" id="slide-8">
+  <div class="slide-header">
+    <p class="eyebrow">Metrics</p>
+    <h2>Platform Stats &amp; Impact</h2>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-box"><strong>120+</strong><span>Recipes</span></div>
+    <div class="stat-box"><strong>18</strong><span>Categories</span></div>
+    <div class="stat-box"><strong>4.9★</strong><span>Avg Rating</span></div>
+    <div class="stat-box"><strong>50k+</strong><span>Home Cooks</span></div>
+  </div>
+  <div class="bar-section">
+    <h3>Recipe Popularity by Category</h3>
+    <div class="bar-row"><span class="bar-label">Soups &amp; Curries</span><div class="bar-track"><div class="bar-fill" style="width:92%"></div></div><span class="bar-val">92%</span></div>
+    <div class="bar-row"><span class="bar-label">Noodles</span><div class="bar-track"><div class="bar-fill" style="width:88%"></div></div><span class="bar-val">88%</span></div>
+    <div class="bar-row"><span class="bar-label">Street Food</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><span class="bar-val">75%</span></div>
+    <div class="bar-row"><span class="bar-label">Desserts</span><div class="bar-track"><div class="bar-fill" style="width:68%"></div></div><span class="bar-val">68%</span></div>
+  </div>
+  <div class="slide-number">8 / 10</div>
+</div>
+
+<!-- ══ SLIDE 9 — Tech Stack ══ -->
+<div class="slide s9" id="slide-9">
+  <div class="slide-header">
+    <p class="eyebrow">Architecture</p>
+    <h2>Technology Stack</h2>
+  </div>
+  <div class="tech-grid">
+    <div class="tech-card">
+      <h3>Frontend</h3>
+      <ul>
+        <li>HTML5 + CSS3</li>
+        <li>Vanilla JavaScript (ES6+)</li>
+        <li>CSS Grid &amp; Flexbox</li>
+        <li>Responsive Design</li>
+        <li>Modal / Overlay UI</li>
+      </ul>
+    </div>
+    <div class="tech-card">
+      <h3>Authentication</h3>
+      <ul>
+        <li>Email + Password form</li>
+        <li>Google OAuth 2.0</li>
+        <li>JWT Token (backend ready)</li>
+        <li>Session management</li>
+        <li>Secure field validation</li>
+      </ul>
+    </div>
+    <div class="tech-card">
+      <h3>AI / Integration</h3>
+      <ul>
+        <li>IBM watsonx Orchestrate</li>
+        <li>wxoLoader.js chat widget</li>
+        <li>au-syd IBM Cloud region</li>
+        <li>Custom agent welcome msg</li>
+        <li>No extra npm dependencies</li>
+      </ul>
+    </div>
+    <div class="tech-card">
+      <h3>Backend (Planned)</h3>
+      <ul>
+        <li>Node.js + Express</li>
+        <li>MongoDB (Mongoose)</li>
+        <li>REST API</li>
+        <li>JWT auth middleware</li>
+        <li>Google OAuth callback</li>
+      </ul>
+    </div>
+    <div class="tech-card">
+      <h3>Hosting &amp; Deploy</h3>
+      <ul>
+        <li>IBM Cloud</li>
+        <li>Static file hosting</li>
+        <li>HTTPS enforced</li>
+        <li>CDN-ready assets</li>
+      </ul>
+    </div>
+    <div class="tech-card">
+      <h3>Design System</h3>
+      <ul>
+        <li>Red &amp; orange Thai palette</li>
+        <li>System UI font stack</li>
+        <li>CSS custom properties</li>
+        <li>Accessible contrast ratios</li>
+        <li>Mobile-first breakpoints</li>
+      </ul>
+    </div>
+  </div>
+  <div class="slide-number">9 / 10</div>
+</div>
+
+<!-- ══ SLIDE 10 — Thank You ══ -->
+<div class="slide s10" id="slide-10">
+  <div class="big-emoji">🙏</div>
+  <h2>Khob Khun Kha!</h2>
+  <p>Thank you for exploring the Thai Recipe website. Bringing the heart of Thai cooking to every kitchen, powered by AI.</p>
+  <div class="contact">
+    <div class="contact-item">🌐 thai-recipe-website.html</div>
+    <div class="contact-item">🤖 IBM watsonx Orchestrate</div>
+    <div class="contact-item">☁️ IBM Cloud · au-syd</div>
+  </div>
+  <div class="slide-number">10 / 10</div>
+</div>
+
+<!-- ── Navigation Controls ── -->
+<div class="controls">
+  <button class="ctrl-btn" id="prevBtn">← Prev</button>
+  <span class="ctrl-info" id="slideInfo">1 / 10</span>
+  <button class="ctrl-btn" id="nextBtn">Next →</button>
+  <button class="ctrl-btn" id="printBtn">🖨 Print</button>
+</div>
+
+<script>
+  var slides = document.querySelectorAll('.slide');
+  var total = slides.length;
+  var current = 0;
+
+  function show(n) {
+    slides.forEach(function(s, i) {
+      s.style.display = (i === n) ? 'flex' : 'none';
+    });
+    document.getElementById('slideInfo').textContent = (n + 1) + ' / ' + total;
+    current = n;
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', function() {
+    show((current - 1 + total) % total);
+  });
+  document.getElementById('nextBtn').addEventListener('click', function() {
+    show((current + 1) % total);
+  });
+  document.getElementById('printBtn').addEventListener('click', function() {
+    slides.forEach(function(s) { s.style.display = 'flex'; });
+    window.print();
+    show(current);
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') show((current + 1) % total);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') show((current - 1 + total) % total);
+  });
+
+  // Start on slide 1
+  show(0);
+</script>
+
+<p style="text-align:center;font-size:0.7rem;color:rgba(255,255,255,0.35);margin-top:0.5rem;border-top:1px solid rgba(255,255,255,0.1);padding-top:0.75rem;width:100%;max-width:900px;">Made with IBM Bob</p>
+</body>
+</html>
